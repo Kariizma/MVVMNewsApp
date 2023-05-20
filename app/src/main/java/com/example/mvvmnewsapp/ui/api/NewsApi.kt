@@ -1,7 +1,8 @@
 package com.example.mvvmnewsapp.ui.api
 
+import com.example.mvvmnewsapp.BuildConfig
+import com.example.mvvmnewsapp.BuildConfig.API_KEY
 import com.example.mvvmnewsapp.ui.model.NewsResponse
-import com.example.mvvmnewsapp.ui.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,7 +15,7 @@ interface NewsApi {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = API_KEY
+        apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponse>
 
     @GET("v2/everything")
@@ -24,6 +25,6 @@ interface NewsApi {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = API_KEY
+        apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponse>
 }
