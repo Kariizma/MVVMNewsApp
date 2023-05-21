@@ -6,20 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmnewsapp.R
 import com.example.mvvmnewsapp.databinding.FragmentBreakingNewsBinding
-import com.example.mvvmnewsapp.ui.adapter.NewsAdapter
+import com.example.mvvmnewsapp.ui.adapter.BreakingNewsAdapter
 import com.example.mvvmnewsapp.ui.util.Resource
 import com.example.mvvmnewsapp.ui.viewmodel.NewsViewModel
 
 class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
 
     private lateinit var viewModel: NewsViewModel
-    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var breakingNewsAdapter: BreakingNewsAdapter
     private lateinit var binding: FragmentBreakingNewsBinding
 
 
@@ -36,9 +34,9 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         binding.lifecycleOwner = this
-        newsAdapter = NewsAdapter()
+        breakingNewsAdapter = BreakingNewsAdapter()
         binding.rvBreakingNews.apply {
-            adapter = newsAdapter
+            adapter = breakingNewsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
 
@@ -48,7 +46,7 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
                     hideProgressBar()
                     response.data?.let {
                         newsResponse ->
-                        newsAdapter.submitList(newsResponse.articles)
+                        breakingNewsAdapter.submitList(newsResponse.articles)
                     }
                 }
                 is Resource.Error -> {

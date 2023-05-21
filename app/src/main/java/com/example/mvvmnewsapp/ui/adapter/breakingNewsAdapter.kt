@@ -1,16 +1,19 @@
 package com.example.mvvmnewsapp.ui.adapter
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mvvmnewsapp.R
 import com.example.mvvmnewsapp.databinding.ItemArticlePreviewBinding
 import com.example.mvvmnewsapp.ui.model.Article
 
-class NewsAdapter : ListAdapter<Article,NewsAdapter.ArticleViewHolder>(DiffCallBack)
+class BreakingNewsAdapter : ListAdapter<Article,BreakingNewsAdapter.ArticleViewHolder>(DiffCallBack)
 {
 
     companion object DiffCallBack: DiffUtil.ItemCallback<Article>() {
@@ -33,6 +36,9 @@ class NewsAdapter : ListAdapter<Article,NewsAdapter.ArticleViewHolder>(DiffCallB
             binding.tvPublishedAt.text = article.publishedAt
             itemView.setOnClickListener {
                 Log.d("OnClick on Item works:", " ${article.source.name}: ${article.url}")
+                it.findNavController().navigate(R.id.action_breakingNewsFragment_to_articleFragment,Bundle().apply {
+                    putSerializable("article",article)
+                })
             }
         }
     }
@@ -41,14 +47,12 @@ class NewsAdapter : ListAdapter<Article,NewsAdapter.ArticleViewHolder>(DiffCallB
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): NewsAdapter.ArticleViewHolder {
+    ): ArticleViewHolder {
         return ArticleViewHolder(ItemArticlePreviewBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: NewsAdapter.ArticleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
     }
-
-
 }

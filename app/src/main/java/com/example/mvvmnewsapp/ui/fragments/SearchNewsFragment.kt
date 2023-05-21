@@ -9,10 +9,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvmnewsapp.R
-import com.example.mvvmnewsapp.databinding.FragmentBreakingNewsBinding
 import com.example.mvvmnewsapp.databinding.FragmentSearchNewsBinding
-import com.example.mvvmnewsapp.ui.adapter.NewsAdapter
+import com.example.mvvmnewsapp.ui.adapter.SearchNewsAdapter
 import com.example.mvvmnewsapp.ui.util.Constants.Companion.SEARCH_NEWS_DELAY
 import com.example.mvvmnewsapp.ui.util.Resource
 import com.example.mvvmnewsapp.ui.viewmodel.NewsViewModel
@@ -21,10 +19,10 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
+class SearchNewsFragment: Fragment() {
 
     private lateinit var viewModel: NewsViewModel
-    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var newsAdapter: SearchNewsAdapter
     private lateinit var binding: FragmentSearchNewsBinding
 
     override fun onCreateView(
@@ -41,7 +39,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         binding.lifecycleOwner = this
-        newsAdapter = NewsAdapter()
+        newsAdapter = SearchNewsAdapter()
         binding.rvSearchNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
