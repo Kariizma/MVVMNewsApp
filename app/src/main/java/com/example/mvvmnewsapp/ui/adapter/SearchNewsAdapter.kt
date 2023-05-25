@@ -30,12 +30,12 @@ class SearchNewsAdapter : ListAdapter<Article,SearchNewsAdapter.ArticleViewHolde
         RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             Glide.with(itemView).load(article.urlToImage).into(binding.ivArticleImage)
-            binding.tvSource.text = article.source.name
+            binding.tvSource.text = article.source?.name
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
             binding.tvPublishedAt.text = article.publishedAt
             itemView.setOnClickListener {
-                Log.d("OnClick on Item works:", " ${article.source.name}: ${article.url}")
+                Log.d("OnClick on Item works:", " ${article.source?.name}: ${article.url}")
                 it.findNavController().navigate(R.id.action_searchNewsFragment_to_articleFragment,Bundle().apply {
                     putSerializable("article",article)
                 })
@@ -55,6 +55,7 @@ class SearchNewsAdapter : ListAdapter<Article,SearchNewsAdapter.ArticleViewHolde
         val item = getItem(position)
         holder.bind(item)
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.mvvmnewsapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +34,11 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         viewModel = (activity as NewsActivity).viewModel
         binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(arg.article.url)
+            loadUrl(arg.article.url.toString())
         }
         binding.fab.setOnClickListener {
             viewModel.saveArticle(arg.article)
+            Log.d("adapter saved article", " ${arg.article.source?.name}: ${arg.article.url}")
             Snackbar.make(view,"Article saved sucessfully", Snackbar.LENGTH_SHORT).show()
         }
 
